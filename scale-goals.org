@@ -1,0 +1,26 @@
+#+OPTIONS: toc:nil
+#+OPTIONS: num:nil
+* Goals for Scales and Arpeggios
+** Phrasing
+ - Notes per bow
+ - Direction
+** Technique (Body awareness)
+ - Pull from back
+ - Elbow heights
+ - Contact point
+ - Free weight of arm
+ - Curved left fingers
+ - Loose fingers
+** Rhythm
+ - Subdivisions of 2 beats (2, 3..16)
+** Intonation
+ - Drones
+ - Double stops
+ - Shifts
+ - Paw exercise
+** Tone
+ - Smooth note transitions
+ - Bowings and articulations
+ - Bow changes smooth
+ - Richness of tone
+ 

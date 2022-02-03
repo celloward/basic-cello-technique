@@ -1,0 +1,158 @@
+#+OPTIONS: num:nil toc:nil date:nil
+#+LATEX_HEADER: \usepackage[cm]{fullpage}
+#+PROPERTY: header-args:lilypond :noweb yes
+* Technique Patterns
+#+name: version-and-paper
+#+begin_src org :exports none
+    \paper{
+      indent=0\mm
+      tagline = ""
+      line-width=170\mm
+      oddFooterMarkup=##f
+      oddHeaderMarkup=##f
+      bookTitleMarkup=##f
+      scoreTitleMarkup=##f
+    }
+#+end_src
+** Scales
+*** Major
+*X - X - C - C - 1 - 2 - 3 - up and over*
+#+begin_src lilypond :file example.pdf
+<<version-and-paper>>
+extend = {\finger \markup "x2"}
+{
+  \clef bass
+  \key d \major
+  \relative c, {
+    d-1 \extend e fis-4 g-1 \extend a b-4 cis-1
+    d-2 e-4 fis-1 g-2 a-4 b-1 cis-2
+    d-3 e-1 fis-2 g-3 \clef "treble" a-\thumb b-1 cis-2
+    d-3 cis-2 b-1 a-\thumb \clef bass  g-3 fis-2 e-1
+    d-3 cis-2 b-1 a-4 g-2 fis-1 e-4
+    d-2 cis-1 b-4 \extend a g-1 fis-4 \extend e d2-1
+  }
+}
+#+end_src
+
+#+RESULTS:
+
+*** Melodic Minor
+*C - X - C - X - 1 - 2 - 3 - up and over - 3 - 2 - 1 - X - X - C - C*
+#+begin_src lilypond :file minor-example.pdf
+<<version-and-paper>>
+extend = {\finger \markup "x2"}
+extendone = {\finger \markup "x1"}
+{
+  \clef bass
+  \key d \minor
+  \relative c, {
+    d-1  e-3 f-4 g-1 \extend a b-4 cis-1
+    d-2 e-4 f-1 \extend g a-4 b-1 cis-2
+    d-3 e-1 f-2 g-3 \clef "treble" a-\thumb b-1 cis-2
+    d-3 c-2 bes-1 a-\thumb \clef bass  g-3 f-2 e-1
+    d-3 c-2 bes-1 a-4 g-2 \extendone f e-4
+    d-2 \extendone c bes-4  a-3  g-1 f-4 e-3 d2-1
+  }
+}
+#+end_src
+
+#+RESULTS:
+[[file:minor-example.pdf]]
+
+
+
+** Sixths
+*** Major Scale
+*C - O - O - C - C - O - O - C*
+#+begin_src lilypond :file major-sixths.pdf
+<<version-and-paper>>
+{
+  \clef bass
+\key d \major
+  \relative c {
+    <d-2 fis,^1>  <e-4 g,^2> <fis-3 a,^1> <g-4 b,^3>
+    <a-2 cis,^1> <b-4  d,^2> <cis-3 e,^1>  <d-4 fis,^3>
+    <e\finger \markup "x2" g,^1> <fis-4 a,^2> <g-2 b,^1> \clef "treble" <a-3 cis,^2> <b-2 d,^1> <cis-3 e,^2>
+    <d-3 fis,^2> <cis-3 e,^2> <b-2 d,^1> <a-3 cis,^2> \clef bass  <g-2 b,^1> <fis-4 a,^2> <e\finger \markup "x2" g,^1>
+    <d-4 fis,^3> <cis-3 e,^1> <b-4  d,^2> <a-2 cis,^1> <g-4 b,^3> <fis-3 a,^1> <e-4 g,^2> <d-2 fis,^1>1
+  }
+}
+#+end_src
+
+#+RESULTS:
+[[file:major-sixths.pdf]]
+** Thirds
+*** Major Scale
+*C - O - O - C - C - O - O - C*
+#+begin_src lilypond :file major-thirds.pdf
+  <<version-and-paper>>
+  extend = {\finger \markup "x1"}
+
+  {
+    \clef bass
+  \key d \major
+    \relative c {
+      <d-4 fis^1>  <e-4 g^\finger \markup "1x"> <fis-4 a^\finger \markup "1x"> <g-4 b^1>
+      <a-4 cis^1> <b-4  d^\finger \markup "1x"> <cis-4 e^\finger \markup "1x">  <d-2 fis^\thumb>
+      <e-3 g^1> <fis-2 a^\thumb> <g-3 b^1> \clef "treble" <a-2 cis^\thumb> <b-3 d^1> <cis-2 e^\thumb>
+      <d-3 fis^1> <cis-2 e^\thumb> <b-3 d^1> <a-2 cis^\thumb> \clef bass  <g-3 b^1> <fis-2 a^\thumb> <e-3 g^1>
+      <d-2 fis^\thumb> <cis-4 e^\finger \markup "x1"> <b-4  d^\finger \markup "x1"> <a-4 cis^1> <g-4 b^1> <fis-4 a^\finger \markup "x1"> <e-4 g^\finger \markup "x1"> <d-4 fis^1>1
+    }
+  }
+#+end_src
+
+#+RESULTS:
+[[file:major-thirds.pdf]]
+*** Melodic Minor Scale
+- UP *O - O - C - C - C - O - O - O*
+- DOWN *O - C - C - O - O - C - O - O*
+#+begin_src lilypond :file melodic-minor-thirds.pdf
+  <<version-and-paper>>
+  extend = {\finger \markup "x1"}
+
+  {
+    \clef bass
+    \key d \minor
+    \relative c {
+      <d-4 f^\finger \markup "1x"> <e-4 g^\finger \markup "1x"> <f-4 a^1> <g-4 b^1>
+      <a-4 cis^1> <b-4  d^\finger \markup "1x"> <cis-4 e^\finger \markup "1x">  <d-2 f^\thumb>
+      <e-3 g^1> <f-2 a^\thumb> <g-3 b^1> \clef "treble" <a-2 cis^\thumb> <b-3 d^1> <cis-2 e^\thumb>
+      <d-3 f^1> <c-2 e^\thumb> <bes-3 d^1> <a-2 c^\thumb> \clef bass  <g-3 bes^1> <f-2 a^\thumb> <e-3 g^1>
+      <d-2 f^\thumb> <c-4 e^1> <bes-4  d^1> <a-4 c\finger \markup "x1"> <g-4 bes\finger \markup "x1"> <f-4 a^1> <e-4 g^\finger \markup "x1"> <d-4 f\finger \markup "x1">1
+    }
+  }
+#+end_src
+
+#+RESULTS:
+[[file:melodic-minor-thirds.pdf]]
+** Octaves
+#+begin_src lilypond :file octaves.pdf
+  <<version-and-paper>>
+  {
+    \clef bass
+    \key c \major
+    \relative c {
+      % Octave
+      <e-\thumb e'^3>2^\markup { \bold Octave }( <e'-\thumb e'^3>) | <e-\thumb e'^3>( <e,-\thumb e'^3>) \bar "||"
+
+      % Tritone
+      <e-\thumb e'^3>2^\markup { \bold Tritone }( <bes'-\thumb bes'^3>) | <bes-\thumb bes'^3>( <e-\thumb e'^3>) | <e-\thumb e'^3>( <bes-\thumb bes'^3>) | <bes-\thumb bes'^3>( <e,-\thumb e'^3>) \bar "||" \break
+
+      % Augmented
+      <e-\thumb e'^3>4^\markup { \bold Augmented }( <gis-\thumb gis'^3>) | <bis-\thumb bis'^3>( <e-\thumb e'^3>) | <e-\thumb e'^3>( <bis-\thumb bis'^3>) | <gis-\thumb gis'^3>( <e-\thumb e'^3>) \bar "||"
+
+      % Diminished
+      <e-\thumb e'^3>4^\markup { \bold Diminished }( <g-\thumb g'^3>) | <bes-\thumb bes'^3>( <des-\thumb des'^3>) | <e-\thumb e'^3>( | <des-\thumb des'^3>) | ( <bes-\thumb bes'^3> | <g-\thumb g'^3>) <e-\thumb e'^3>1 \bar "||" \break
+
+      % Whole Tone
+      \key e \major
+      <e-\thumb e'^3>4^\markup { \bold Whole Tone }( <fis-\thumb fis'^3>) | <gis-\thumb gis'^3>( <ais-\thumb ais'^3>) | <bis-\thumb bis'^3>( | <cisis-\thumb cisis'^3>) | ( <e-\thumb e'^3> | <cisis-\thumb cisis'^3>) <bis-\thumb bis'^3>( <ais-\thumb ais'^3>) <gis-\thumb gis'^3>( <fis-\thumb fis'^3>) <e-\thumb e'^3>1 \bar "||" \break
+
+      % Chromatic
+      <e-\thumb e'^3>4^\markup { \bold Chromatic }( <f-\thumb f'^3>) <fis-\thumb fis'^3>( <g-\thumb g'^3>) | <gis-\thumb gis'^3>( <a-\thumb a'^3>) <ais-\thumb ais'^3>( <b-\thumb b'^3>) | <c-\thumb c'^3>( | <cis-\thumb cis'^3>) <d-\thumb d'^3>( | <dis-\thumb dis'^3>) <e-\thumb e'^3>1 \bar "||"
+    }
+  }
+#+end_src
+
+#+RESULTS:
+[[file:octaves.pdf]]
